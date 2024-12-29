@@ -69,5 +69,6 @@ app.listen(port, () => {
     if (process.env.NODE_ENV === 'production') {
         console.log(`서버가 프로덕션 모드에서 실행 중입니다.`);
     } else {
-        console.log(`서버가 http://localhost
-
+        console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`);
+    }
+});

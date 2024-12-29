@@ -40,8 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
 function block() {
     const mystyle = document.getElementById('reservationForm');
+
     if (mystyle.style.display === 'none') {
         mystyle.style.display = 'block';
     }
