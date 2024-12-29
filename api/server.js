@@ -11,7 +11,9 @@ const port = process.env.PORT || 3000;
 
 // CORS 설정
 app.use(cors({
-    origin: '*' // 모든 도메인에서 접근 허용
+    origin: '*', // 모든 도메인에서 접근 허용
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization'
 }));
 
 // MySQL 연결 설정
