@@ -1,12 +1,14 @@
 [build]
-  publish = "public"
+  publish = "build"  # public 대신 build로 변경
   command = "npm run build"
 
 [context.production.environment]
   NODE_ENV = "production"
+  NODE_OPTIONS = "--openssl-legacy-provider"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
 
