@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function resevation() {
-    const mystyle = document.getElementById("reservationForm");
+function block() {
+    const mystyle = document.getElementById('reservationForm');
     if (mystyle.style.display === 'none') {
         mystyle.style.display = 'block';
     }
