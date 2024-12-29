@@ -1,8 +1,12 @@
 [build]
   publish = "public"
-  command = "npm start"
+  command = "npm run build"
+
+[context.production.environment]
+  NODE_ENV = "production"
 
 [[redirects]]
-  from = "/"
+  from = "/*"
   to = "/index.html"
   status = 200
+
