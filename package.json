@@ -4,16 +4,17 @@
   "description": "A student reservation system",
   "main": "src/index.js",
   "scripts": {
-    "start": "node api/server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql2": "^2.2.5",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5"
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "dotenv": "^8.2.0"
@@ -22,4 +23,3 @@
     "node": "22.x"
   }
 }
-
