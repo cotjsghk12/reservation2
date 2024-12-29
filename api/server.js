@@ -9,6 +9,11 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+// CORS 설정
+app.use(cors({
+    origin: '*' // 모든 도메인에서 접근 허용, 필요한 경우 특정 도메인만 허용 가능
+}));
+
 // MySQL 연결 설정
 const db = mysql.createPool({
     host: process.env.DB_HOST,
@@ -18,7 +23,6 @@ const db = mysql.createPool({
 });
 
 app.use(bodyParser.json());
-app.use(cors());
 app.use(express.static(path.join(__dirname, '../public')));
 
 // 예약 API
@@ -62,6 +66,11 @@ app.post('/reserve', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`);
+    if (process.env.NODE_ENV === 'production') {
+        console.log(`서버가 프로덕션 모드에서 실행 중입니다.`);
+    } else {
+        console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`);
+    }
 });
+
 
