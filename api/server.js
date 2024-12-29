@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 // CORS 설정
 app.use(cors({
-    origin: '*' // 모든 도메인에서 접근 허용, 필요한 경우 특정 도메인만 허용 가능
+    origin: 'https://reservation2-ow2y3k799-cotjsghk12s-projects.vercel.app' // 허용할 도메인
 }));
 
 // MySQL 연결 설정
