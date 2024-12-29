@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const fetchReservations = async () => {
         try {
-            const response = await fetch('https://reservation2-6xuw-nayqdmk6d-cotjsghk12s-projects.vercel.app/api/reservations');
+            const response = await fetch('https://reservation2-bpa6kbykm-cotjsghk12s-projects.vercel.app/api/reservations');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const classNumber = document.querySelector('#classNumber').value;
 
         try {
-            const response = await fetch('https://reservation2-6xuw-nayqdmk6d-cotjsghk12s-projects.vercel.app/api/reserve', {
+            const response = await fetch('https://reservation2-bpa6kbykm-cotjsghk12s-projects.vercel.app/api/reserve', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
