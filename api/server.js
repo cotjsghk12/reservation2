@@ -2,22 +2,24 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
 const path = require('path');
-const cors = require('cors');  // CORS 추가
+const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // MySQL 연결 설정
 const db = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'Young0612!',
-    database: 'reservation_system'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
 app.use(bodyParser.json());
-app.use(cors());  // CORS 사용
-app.use(express.static(path.join(__dirname, 'public'))); // 현재 디렉토리를 정적 파일의 기준으로 설정
+app.use(cors());
+app.use(express.static(path.join(__dirname, '../public')));
 
 // 예약 API
 app.post('/reserve', async (req, res) => {
