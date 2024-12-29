@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 // CORS 설정
 app.use(cors({
-    origin: 'https://reservation2-bpa6kbykm-cotjsghk12s-projects.vercel.app/reservation.html' // 허용할 도메인
+    origin: '*' // 모든 도메인에서 접근 허용
 }));
 
 // MySQL 연결 설정
@@ -69,8 +69,5 @@ app.listen(port, () => {
     if (process.env.NODE_ENV === 'production') {
         console.log(`서버가 프로덕션 모드에서 실행 중입니다.`);
     } else {
-        console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`);
-    }
-});
-
+        console.log(`서버가 http://localhost
 
