@@ -13,7 +13,7 @@ function reservation() {
 document.addEventListener('DOMContentLoaded', async function() {
     // 예약 데이터 가져오기
     try {
-        const response = await fetch('http://localhost:3000/api/reservations');
+        const response = await fetch('https://reservation2.vercel.app/api/reserve');
         const reservations = await response.json();
         console.log(reservations);
     } catch (error) {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/reserve', {
+            const response = await fetch('https://reservation2.vercel.app/api/reserve', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ studentName, classNumber })
