@@ -10,11 +10,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // CORS 설정
-app.use(cors({
-    origin: '*', // 모든 도메인에서 접근 허용
-    methods: 'GET,POST,PUT,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type, Authorization'
-}));
+app.use(cors());
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // MySQL 연결 설정
 const db = mysql.createPool({
@@ -28,7 +29,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
 // 예약 API
-app.post('/reserve', async (req, res) => {
+app.post('/api/reserve', async (req, res) => {
     const { studentName, classNumber } = req.body;
 
     // 입력 데이터 검증
@@ -61,6 +62,16 @@ app.post('/reserve', async (req, res) => {
             [studentName, classNumber]
         );
         res.json({ message: `예약이 완료되었습니다! 학생: ${studentName}, 반 번호: ${classNumber}` });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+});
+
+app.get('/api/reservations', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM Reservations');
+        res.json(rows);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: '서버 오류가 발생했습니다.' });
