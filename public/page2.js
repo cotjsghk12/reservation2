@@ -38,3 +38,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     fetchReservations();
 });
+
+
+function resevation() {
+    const mystyle = document.getElementById("reservationForm");
+    if (mystyle.style.display === 'none') {
+        mystyle.style.display = 'block';
+    }
+
+    else {
+        mystyle.style.display = 'none';
+    }
+}
