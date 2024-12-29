@@ -1,15 +1,17 @@
 {
     "name": "reservation-system",
     "version": "1.0.0",
-    "description": "학생 예약 프로그램",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js"
+      "start": "node server.js",
+      "build": "react-scripts build"
     },
     "dependencies": {
-        "body-parser": "^1.19.0",
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "mysql2": "^2.3.3"
+      "express": "^4.17.1",
+      "mysql": "^2.18.1",
+      "react": "^17.0.2",
+      "react-dom": "^17.0.2",
+      "react-scripts": "4.0.3"
     }
-}
+  }
+  
