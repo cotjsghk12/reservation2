@@ -17,6 +17,9 @@ app.use((req, res, next) => {
     next();
 });
 
+// 정적 파일 제공 설정
+app.use(express.static(path.join(__dirname, '../public')));
+
 // MySQL 연결 설정
 const db = mysql.createPool({
     host: process.env.DB_HOST,
@@ -26,19 +29,16 @@ const db = mysql.createPool({
 });
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../public')));
 
 // 예약 API
 app.post('/api/reserve', async (req, res) => {
     const { studentName, classNumber } = req.body;
 
-    // 입력 데이터 검증
     if (!studentName || !classNumber || typeof studentName !== 'string' || !/^\d+$/.test(classNumber)) {
         return res.status(400).json({ message: '입력 데이터가 올바르지 않습니다.' });
     }
 
     try {
-        // 현재 예약자 수 확인
         const [countResult] = await db.query('SELECT COUNT(*) AS total FROM Reservations');
         const totalReservations = countResult[0].total;
 
@@ -46,7 +46,6 @@ app.post('/api/reserve', async (req, res) => {
             return res.json({ message: '예약이 모두 찼습니다. 더 이상 예약할 수 없습니다.' });
         }
 
-        // 중복 체크
         const [rows] = await db.query(
             'SELECT * FROM Reservations WHERE student_name = ? AND class_number = ?',
             [studentName, classNumber]
@@ -56,14 +55,13 @@ app.post('/api/reserve', async (req, res) => {
             return res.json({ message: '이미 예약되었습니다!' });
         }
 
-        // 새로운 예약 저장
         await db.query(
             'INSERT INTO Reservations (student_name, class_number) VALUES (?, ?)',
             [studentName, classNumber]
         );
         res.json({ message: `예약이 완료되었습니다! 학생: ${studentName}, 반 번호: ${classNumber}` });
     } catch (error) {
-        console.error(error);
+        console.error('Database error:', error);  // 오류 로그 출력
         res.status(500).json({ message: '서버 오류가 발생했습니다.' });
     }
 });
@@ -73,7 +71,7 @@ app.get('/api/reservations', async (req, res) => {
         const [rows] = await db.query('SELECT * FROM Reservations');
         res.json(rows);
     } catch (error) {
-        console.error(error);
+        console.error('Database error:', error);  // 오류 로그 출력
         res.status(500).json({ message: '서버 오류가 발생했습니다.' });
     }
 });
