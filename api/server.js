@@ -84,20 +84,3 @@ app.listen(port, () => {
     }
 });
 
-app.get('/api/reservations', async (req, res) => {
-    try {
-        const [rows] = await db.query('SELECT * FROM Reservations');
-        res.json(rows);
-    } catch (error) {
-        console.error('Database error:', error);  // 오류 로그 출력
-        res.status(500).json({ message: '서버 오류가 발생했습니다.' });
-    }
-});
-
-app.listen(port, () => {
-    if (process.env.NODE_ENV === 'production') {
-        console.log(`서버가 프로덕션 모드에서 실행 중입니다.`);
-    } else {
-        console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`);
-    }
-});
